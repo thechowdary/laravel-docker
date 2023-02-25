@@ -26,6 +26,10 @@ Step 6: `docker-compose exec app rm -rf vendor composer.lock`
 
 Step 7: `docker-compose exec app composer install`
 
-Step 8: `docker-compose exec app php artisan key:generate`
+Step 8: 
+- `docker-compose exec app php artisan key:generate`
+- From the ./laravel/.env file change DB_HOST value to the db container name. In my case, it's `myproject-db`
 
-Step 9: Visit http://localhost:8003/ <8003: port_number that was set in the step 1 and step 2>
+Step 9: `docker-compose exec app php artisan migrate`
+
+Step 10: Visit http://localhost:8003/ <8003: port_number that was set in the step 1 and step 2>
