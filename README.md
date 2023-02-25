@@ -11,7 +11,7 @@ Step 2: Files & Database
 - Download laravel to the same location. If it's a new laravel application, use the link: https://github.com/laravel/laravel
 - You may need to set the same port number in composer.json file, that was there in step 1.
 - Also don't forget to set .env file, you may need to copy from .env.example to .env, if its a new laravel application.
-- If it's an old application, Put your exported db's sql file to `docker-compose/mysql` folder.
+- If it's an old application, Put your exported db's sql file to `docker-compose/mysql` folder by replacing existing one.
 
 Step 3: docker-compose build
 
