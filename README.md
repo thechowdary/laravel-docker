@@ -145,8 +145,9 @@ class BookController extends Controller
 
 ### Step 4: Create views
 
-`php artisan make:view books.index`
-`php artisan make:view books.create`
-`php artisan make:view books.edit`
-
+```
+php artisan make:view books.index
+php artisan make:view books.create
+php artisan make:view books.edit
+```
 These commands will create three view files in the resources/views/books directory: index.blade.php, create.blade.php, and edit.blade.php.
