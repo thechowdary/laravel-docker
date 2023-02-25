@@ -8,9 +8,9 @@ Step 1:
 - You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration in this file.
 
 Step 2: 
-- Download laravel to the same location. If it's new installation, use the link: https://github.com/laravel/laravel
+- Download laravel to the same location. If it's a new laravel application, use the link: https://github.com/laravel/laravel
 - You may need to set the same port number in composer.json file, that was there in step 1.
-- Also don't forget to set .env file, you may need to copy from .env.example to .env. 
+- Also don't forget to set .env file, you may need to copy from .env.example to .env, if its a new laravel application.
 
 Step 3: docker-compose build
 
