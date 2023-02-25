@@ -35,4 +35,3 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 USER $user
-RUN chown -R www-data:www-data /var/www
