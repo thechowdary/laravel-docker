@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ./:/var/www
+      - ./laravel/:/var/www
     networks:
       - myproject
 
@@ -37,9 +37,9 @@ services:
     container_name: myproject-nginx
     restart: unless-stopped
     ports:
-      - 8003:80
+      - 8010:80
     volumes:
-      - ./:/var/www
+      - ./laravel/:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - myproject

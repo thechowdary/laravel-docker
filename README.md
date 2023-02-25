@@ -5,7 +5,7 @@ Steps to do:
 
 Step 1: 
 - Clone this repo: ```git clone https://github.com/thechowdary/laravel-docker/```
-- You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration in this file.
+- You can change the port number in docker-compose.yml, default set to 8003 in the .env file.
 
 Step 2: Files & Database
 - Download laravel to the same location. If it's a new laravel application, use the link: https://github.com/laravel/laravel
@@ -24,3 +24,5 @@ Step 6: `docker-compose exec app rm -rf vendor composer.lock`
 Step 7: `docker-compose exec app composer install`
 
 Step 8: `docker-compose exec app php artisan key:generate`
+
+Step 9: Visit http://localhost:8003/ <8003: port_number that was set in the step 1 and step 2>
