@@ -5,7 +5,6 @@ Use docker for laravel
 
 ### Step 1: 
 - Clone this repo: ```git clone https://github.com/thechowdary/laravel-docker/```
-- `git checkout docker_volume`
 - You may replace `myproject` word in docker-compose.yml with your project name
 - You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration inside this file.
 - Set the database details in the .env file
