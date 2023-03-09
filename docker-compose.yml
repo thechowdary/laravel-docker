@@ -5,6 +5,8 @@ services:
       args:
         user: sammy
         uid: 1000
+        nginxport: 8003 # please mention this same port in the below nginx configuration.
+        dbcontainer: myproject-db # Please mention the same value that is mentioned in the below section db=>containe_name
       context: ./
       dockerfile: Dockerfile
     image: myproject
@@ -38,7 +40,7 @@ services:
     container_name: myproject-nginx
     restart: unless-stopped
     ports:
-      - 8010:80
+      - 8003:80 #please mention this same port in the above app configuration.
     volumes:
       - laravel:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
