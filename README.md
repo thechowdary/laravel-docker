@@ -9,17 +9,17 @@ Use docker for laravel
 - You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration inside this file.
 - Set the database details in the .env file
 
-### Step 2: Files & Database
+### Step 2: 
+- `docker-compose build`
+
+### Step 3: 
+- `docker-compose up -d`
+
+### Step 4: Files & Database
 - Latest laravel files will be pulled from github to ```/var/www/```, Which is the root directory of the project.
 - To make changes to project files, please edit using volumes section in visual studio or this location in windows: ```\\wsl$\docker-desktop-data\data\docker\volumes```
 - The `.env` file will be copied by default during build process. You may need to set the same `port number` in `.env` file that was set in docker-compose.yml in the first step. 
 - If it's an old application, Put your exported db's sql file to `docker-compose/mysql` folder by replacing existing sql file.
-
-### Step 3: 
-- `docker-compose build`
-
-### Step 4: 
-- `docker-compose up -d`
 
 ### Step 5: 
 - `docker-compose exec app ls -l`
