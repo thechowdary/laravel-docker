@@ -136,7 +136,7 @@ class BookController extends Controller
      */
     public function show(Book $book): View
     {
-        return view('books.show',compact('books'));
+        return view('books.show',compact('book'));
     }
 
     public function edit(Book $book): View
@@ -170,24 +170,40 @@ php artisan make:view books.index
 php artisan make:view books.create
 php artisan make:view books.edit
 ```
-These commands will create three view files in the resources/views/books directory: index.blade.php, create.blade.php, and edit.blade.php.
+These commands will create three view files in the resources/views/books directory: index.blade.php, create.blade.php, and edit.blade.php. If these commands didn't work, then scroll below and make the changes to views directory as mentioned.
 
 
 ===========================
+
+# Alter table columns, if needed. Examples:
+
+- To alter a table, generate schema first, then make changes in the schema, finally migrate it.
+- `php artisan make:migration alter_books_table_add_null_to_description`
+- Then make the schema like this: 
+        ``` 
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('description')->nullable()->change();
+        }); 
+        ```
+- `php artisan make:migration alter_books_table_add_null_to_price`
+- Then make the schema like this: 
+        ``` 
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('price')->nullable()->change();
+        }); 
+        ```
+- `php artisan migrate`
+
 
 # Other important docker commands
 
 - This will provide all the details including local ip address for db access as a hostname
 -  `docker inspect myproject-db`
 
-- To alter a table, generate schema first, then make changes in the schema, finally migrate it.
-- `php artisan make:migration alter_books_table_add_null_to_price`
-- `php artisan migrate`
-
 - To get the newly created controllers, regenerate autoload:
 - `docker-compose exec app composer dump-autoload`
 
-- Use namespaces properly in the routes file incase the route didn't work. Don't forget to clear the route cache everytime you update the file.
+- Use namespaces properly in the routes file incase the route didn't work. Don't forget to clear the route cache everytime you update the file. For example: `Route::resource('books', \App\Http\Controllers\BookController::class);`
 
 - To create a new table schema:
 - `docker-compose exec app php artisan make:migration create_books_table --create=books`
@@ -257,6 +273,14 @@ These commands will create three view files in the resources/views/books directo
                     <div class="form-group">
                         <label for="author">Author</label>
                         <input type="text" name="author" id="author" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" name="price" id="price" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -377,12 +401,12 @@ These commands will create three view files in the resources/views/books directo
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+J4Uc4n5UvNl+O84+BmBLJoPzK7tW+a" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     @yield('styles')
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">My App</a>
+        <a class="navbar-brand" href="/">My App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
