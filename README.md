@@ -5,15 +5,15 @@ Use docker for laravel
 
 ### Step 1: 
 - Clone this repo: ```git clone https://github.com/thechowdary/laravel-docker/```
-- `git checkout develop`
-- You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration in this file.
+- `git checkout docker_volume`
+- You may replace `myproject` word in docker-compose.yml with your project name
+- You can change the port number in docker-compose.yml, default set to 8003 in the nginx configuration inside this file.
 - Set the database details in the .env file
 
 ### Step 2: Files & Database
-- `cd laravel`
-- Download laravel to this location. If it's a new laravel application, use `git clone https://github.com/laravel/laravel .`
-- You may need to set the same port number in .env file, that was there in step 1.
-- Also don't forget to set .env file. you may need to copy from .env.example to .env, if its a new laravel application.
+- Latest laravel files will be pulled from github to ```/var/www/```, Which is the root directory of the project.
+- To make changes to project files, please edit using volumes section in visual studio or this location in windows: ```\\wsl$\docker-desktop-data\data\docker\volumes```
+- The `.env` file will be copied by default during build process. You may need to set the same `port number` in `.env` file that was set in docker-compose.yml in the first step. 
 - If it's an old application, Put your exported db's sql file to `docker-compose/mysql` folder by replacing existing sql file.
 
 ### Step 3: 
@@ -33,7 +33,7 @@ Use docker for laravel
 
 ### Step 8: 
 - `docker-compose exec app php artisan key:generate`
-- From the ./laravel/.env file change DB_HOST value to the db container name. In my case, it's `myproject-db`
+- Make the necessary changes to database environment variables in the `project's .env` file. In my case, `HOST: myproject-db`, Set `Laravel` for Database, username and password.
 
 ### Step 9: 
 - `docker-compose exec app php artisan migrate`
