@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ./laravel/:/var/www
+      - laravel:/var/www
     networks:
       - myproject
 
@@ -40,10 +40,14 @@ services:
     ports:
       - 8010:80
     volumes:
-      - ./laravel/:/var/www
+      - laravel:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - myproject
+    
+volumes:
+  laravel:
+  dbdata:
 
 networks:
   myproject:

@@ -31,7 +31,17 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user && \
     chown -R $user:$user /var/www
 
+RUN adduser $user sudo
+
 # Set working directory
 WORKDIR /var/www
+
+RUN rm -rf html
+
+RUN git clone https://github.com/laravel/laravel .
+
+RUN cp .env.example .env
+
+RUN chown -R $user:$user /var/www
 
 USER $user
