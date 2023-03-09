@@ -3,6 +3,8 @@ FROM php:8.1-fpm
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
+ARG nginxport
+ARG dbcontainer
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -41,6 +43,11 @@ RUN rm -rf html
 RUN git clone https://github.com/laravel/laravel .
 
 RUN cp .env.example .env
+
+RUN sed -i "s/^APP_URL=.*/APP_URL=http:\/\/localhost:$nginxport/g" .env
+RUN sed -i 's/^DB_USERNAME=.*/DB_USERNAME=laravel/g' .env
+RUN sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=laravel/g' .env
+RUN sed -i "s/^DB_HOST=.*/DB_HOST=$dbcontainer/g" .env
 
 RUN chown -R $user:$user /var/www
 
