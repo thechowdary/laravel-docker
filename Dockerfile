@@ -5,6 +5,7 @@ ARG user
 ARG uid
 ARG nginxport
 ARG dbcontainer
+ARG githuburl
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -20,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd tokenizer xml curl soap
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -40,7 +41,7 @@ WORKDIR /var/www
 
 RUN rm -rf html
 
-RUN git clone https://github.com/laravel/laravel .
+RUN git clone $githuburl .
 
 RUN cp .env.example .env
 
@@ -48,6 +49,10 @@ RUN sed -i "s/^APP_URL=.*/APP_URL=http:\/\/localhost:$nginxport/g" .env
 RUN sed -i 's/^DB_USERNAME=.*/DB_USERNAME=laravel/g' .env
 RUN sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=laravel/g' .env
 RUN sed -i "s/^DB_HOST=.*/DB_HOST=$dbcontainer/g" .env
+
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+    sed -i 's/upload_max_filesize = 20M/upload_max_filesize = 1280M/g' /usr/local/etc/php/php.ini && \
+    sed -i 's/post_max_size =.*/post_max_size  = 8000M/g' /usr/local/etc/php/php.ini
 
 RUN chown -R $user:$user /var/www
 

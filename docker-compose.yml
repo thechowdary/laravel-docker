@@ -5,22 +5,23 @@ services:
       args:
         user: sammy
         uid: 1000
-        nginxport: 8003 # please mention this same port in the below nginx configuration.
-        dbcontainer: myproject-db # Please mention the same value that is mentioned in the below section db=>containe_name
+        githuburl: ${GITHUB_URL}
+        nginxport: ${NGINX_PORT} # please mention this same port in the below nginx configuration.
+        dbcontainer: ${PROJECT_NAME}-db # Please mention the same value that is mentioned in the below section db=>containe_name
       context: ./
       dockerfile: Dockerfile
-    image: myproject
-    container_name: myproject-app
+    image: ${PROJECT_NAME}
+    container_name: ${PROJECT_NAME}-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
       - laravel:/var/www
     networks:
-      - myproject
+      - ${PROJECT_NAME}
 
   db:
     image: mysql:8.0
-    container_name: myproject-db
+    container_name: ${PROJECT_NAME}-db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -33,24 +34,24 @@ services:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
     networks:
-      - myproject
+      - ${PROJECT_NAME}
 
   nginx:
     image: nginx:alpine
-    container_name: myproject-nginx
+    container_name: ${PROJECT_NAME}-nginx
     restart: unless-stopped
     ports:
-      - 8003:80 #please mention this same port in the above app configuration.
+      - ${NGINX_PORT}:80 #please mention this same port in the above app configuration.
     volumes:
       - laravel:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
-      - myproject
+      - ${PROJECT_NAME}
     
 volumes:
   laravel:
   dbdata:
 
 networks:
-  myproject:
+  ${PROJECT_NAME}:
     driver: bridge
