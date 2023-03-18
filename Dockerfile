@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd tokenizer xml curl soap
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd 
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -45,10 +45,11 @@ RUN git clone $githuburl .
 
 RUN cp .env.example .env
 
+RUN sed -i "s/^APP_NAME=.*/APP_NAME=$projectname/g" .env
 RUN sed -i "s/^APP_URL=.*/APP_URL=http:\/\/localhost:$nginxport/g" .env
 RUN sed -i 's/^DB_USERNAME=.*/DB_USERNAME=laravel/g' .env
 RUN sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=laravel/g' .env
-RUN sed -i "s/^DB_HOST=.*/DB_HOST=$dbcontainer/g" .env
+RUN sed -i "s/^DB_HOST=.*/DB_HOST=$projectname-db/g" .env
 
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
     sed -i 's/upload_max_filesize = 20M/upload_max_filesize = 1280M/g' /usr/local/etc/php/php.ini && \
