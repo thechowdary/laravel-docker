@@ -3,6 +3,39 @@ Use docker for laravel
 
 ## Steps to do:
 
+### Step 1: Configuration
+- Clone this repo: ```git clone https://github.com/thechowdary/laravel-docker/```
+- You may replace `larablog` word in .env file with your project name and use the same project name to replace network name in docker-compose.yml, default is `larablog`.
+- You can change the port number in .env file.
+- Set the database details in the .env file.
+- To make it available with your domain, create a tunnel using cloudflare zero trust and use the token in the .env file
+
+### Step 2: Docker Containers
+Run the following commands one by one to start containers.
+- ```docker-compose build```
+- ```docker-compose up -d ```
+
+### Step 3: SSH into the app container
+- ```docker-compose exec -it app /bin/bash ```
+
+### Step 4: Install Laravel Application with pre-built blog, and FilamentPHP admin panel
+- `composer install`
+- `php artisan key:generate`
+- `php artisan migrate:fresh`
+
+### Step 5: Create a new user
+- `php artisan shield:install`
+- `php artisan shield:super-admin`
+
+
+That's all! Enjoy Laravel Blogging.
+
+To customize or develop your own CRUD please follow this link: https://filamentphp.com/docs/1.x/admin/resources
+
+
+## OLD STEPS
+Leaving old steps to install laravel and basic crud without filamentphp.
+
 ### Step 1: 
 - Clone this repo: ```git clone https://github.com/thechowdary/laravel-docker/```
 - You may replace `myproject` word in docker-compose.yml with your project name
