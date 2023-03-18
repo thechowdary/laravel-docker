@@ -50,13 +50,13 @@ services:
 
   tunnel:
     depends_on:
-      - webserver
-    container_name: cloudflared-tunnel
+      - nginx
+    container_name: ${PROJECT_NAME}-cloudflared-tunnel
     image: cloudflare/cloudflared
     restart: unless-stopped
     command: tunnel run
     environment:
-      - TUNNEL_TOKEN=$CLOUDFLARE_TOKEN
+      - TUNNEL_TOKEN=${CLOUDFLARE_TOKEN}
     networks:
       - ${PROJECT_NAME}
     
@@ -65,5 +65,5 @@ volumes:
   dbdata:
 
 networks:
-  arun: # Please mention the PROJECT_NAME set in the .env file. default both network and project names are arun.
+  larablog: # Please mention the PROJECT_NAME set in the .env file. default both network and project names are larablog.
     driver: bridge

@@ -4,7 +4,7 @@ FROM php:8.1-fpm
 ARG user
 ARG uid
 ARG nginxport
-ARG dbcontainer
+ARG projectname
 ARG githuburl
 
 # Install system dependencies
