@@ -46,7 +46,7 @@ RUN git clone $githuburl .
 RUN cp .env.example .env
 
 RUN sed -i "s/^APP_NAME=.*/APP_NAME=$projectname/g" .env
-RUN sed -i "s/^APP_URL=.*/APP_URL=http:\/\/localhost:$nginxport/g" .env
+RUN sed -i "s/^APP_URL=.*/APP_URL=http:\/\/host\.docker\.internal:$nginxport/g" .env
 RUN sed -i 's/^DB_USERNAME=.*/DB_USERNAME=laravel/g' .env
 RUN sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=laravel/g' .env
 RUN sed -i "s/^DB_HOST=.*/DB_HOST=$projectname-db/g" .env
