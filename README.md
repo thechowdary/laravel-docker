@@ -36,6 +36,12 @@ Run the following commands one by one to start containers.
 
 - Please replace `larablog` string in the above path(s) with the folder name of where this git repo is cloned.
 
+### Step 7: Accessing database through adminer:
+- Visit <APP_URL>/db.php
+- Hostname: <PROJECT_NAME>-db
+- Username and Password are same as mentioned in the .env file.
+
+
 That's all! Enjoy Laravel Blogging.
 
 To customize or develop your own CRUD please follow this link: https://filamentphp.com/docs/1.x/admin/resources
