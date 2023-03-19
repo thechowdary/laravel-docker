@@ -27,6 +27,14 @@ Run the following commands one by one to start containers.
 - `php artisan shield:install`
 - `php artisan shield:super-admin`
 
+### Step 6: Editing Laravel Files
+- In Ubuntu
+`cd /var/lib/docker/volumes/larablog_laravel/_data`
+
+- In Windows, through explorer goto:
+`\\wsl$\docker-desktop-data\data\docker\volumes\larablog_laravel\_data`
+
+- Please replace `larablog` string in the above path(s) with the folder name of where this git repo is cloned.
 
 That's all! Enjoy Laravel Blogging.
 
