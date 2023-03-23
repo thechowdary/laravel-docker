@@ -477,7 +477,8 @@ These commands will create three view files in the resources/views/books directo
 ```
 # Routes Configration
 - Add `Route::resource('books', \App\Http\Controllers\BookController::class);` inside the `routes/web.php` file.
-```Route::get(
+```
+Route::get(
     '/{books}',
     [\App\Http\Controllers\BookController::class, 'show']
 );
@@ -494,4 +495,5 @@ Route::match(
     ['delete', 'destroy'],
     '/{books}',
     [\App\Http\Controllers\BookController::class, 'destroy']
-); ```
+); 
+```
