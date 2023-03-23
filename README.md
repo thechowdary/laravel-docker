@@ -477,21 +477,21 @@ These commands will create three view files in the resources/views/books directo
 ```
 # Routes Configration
 - Add `Route::resource('books', \App\Http\Controllers\BookController::class);` inside the `routes/web.php` file.
-- ```Route::get(
-    '/{datediff}',
+```Route::get(
+    '/{books}',
     [\App\Http\Controllers\BookController::class, 'show']
 );
 Route::get(
-    '/{datediff}/edit',
+    '/{books}/edit',
     [\App\Http\Controllers\BookController::class, 'edit']
 );
 Route::match(
     ['put', 'patch'],
-    '/{datediff}',
+    '/{books}',
     [\App\Http\Controllers\BookController::class, 'update']
 );
 Route::match(
     ['delete', 'destroy'],
-    '/{datediff}',
+    '/{books}',
     [\App\Http\Controllers\BookController::class, 'destroy']
 ); ```
