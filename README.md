@@ -47,7 +47,7 @@ That's all! Enjoy Laravel Blogging.
 To customize or develop your own CRUD please follow this link: https://filamentphp.com/docs/1.x/admin/resources
 
 
-## OLD STEPS
+## OLD STEPS FOR LARAVEL
 Leaving old steps to install laravel and basic crud without filamentphp.
 
 ### Step 1: 
@@ -477,3 +477,21 @@ These commands will create three view files in the resources/views/books directo
 ```
 # Routes Configration
 - Add `Route::resource('books', \App\Http\Controllers\BookController::class);` inside the `routes/web.php` file.
+- ```Route::get(
+    '/{datediff}',
+    [\App\Http\Controllers\BookController::class, 'show']
+);
+Route::get(
+    '/{datediff}/edit',
+    [\App\Http\Controllers\BookController::class, 'edit']
+);
+Route::match(
+    ['put', 'patch'],
+    '/{datediff}',
+    [\App\Http\Controllers\BookController::class, 'update']
+);
+Route::match(
+    ['delete', 'destroy'],
+    '/{datediff}',
+    [\App\Http\Controllers\BookController::class, 'destroy']
+); ```
